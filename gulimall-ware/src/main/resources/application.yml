@@ -4,7 +4,12 @@ spring:
     password: mysql.mylove
     url: jdbc:mysql://124.70.58.37:3306/gulimall_wms?useUnicode=true&characterEncoding=utf8
     driver-class-name: com.mysql.jdbc.Driver
-
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  application:
+    name: gulimall-ware
 mybatis-plus:
   mapper-location: classpath*:/mapper/**/*.xml
   global-config:
