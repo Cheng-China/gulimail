@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +26,22 @@ import com.atguigu.gulimall.common.utils.R;
  * @email 481193684@qq.com
  * @date 2023-10-30 15:54:03
  */
+@RefreshScope
 @RestController
 @RequestMapping("member/member")
 public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    @Value("${member.user.name}")
+    String name;
+
+    @Value("${member.user.age}")
+    String age;
+    @RequestMapping("/test")
+    public R testNacosConfig(){
+        return R.ok().put("name", name).put("age", age);
+    }
     /**
      * 列表
      */
