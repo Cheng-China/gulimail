@@ -17,4 +17,4 @@ mybatis-plus:
       #      设置主键自增
       id-type: auto
 server:
-  port: 8001
+  port: 8002

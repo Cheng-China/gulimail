@@ -1,8 +1,10 @@
 package com.atguigu.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
+import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +31,16 @@ import com.atguigu.gulimall.common.utils.R;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+
+    /**
+     * 返回树形结构数据
+     * @return
+     */
+    @RequestMapping("/list/tree")
+    public String list(){
+        List<CategoryEntity> categoryEntities =  categoryService.listWithTree();
+        return JSONUtil.toJsonStr(categoryEntities).toString();
+    }
 
     /**
      * 列表

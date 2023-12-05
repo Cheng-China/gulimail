@@ -79,7 +79,14 @@
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 		</dependency>
+		<!--hutool 工具包-->
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>5.8.8</version>
+		</dependency>
 	</dependencies>
+
 
 	<!--使用 spring-cloud-alibaba 需要加入的依赖管理-->
 	<dependencyManagement>
