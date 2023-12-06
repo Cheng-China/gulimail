@@ -4,13 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.atguigu.gulimall.product.entity.CategoryEntity;
 import com.atguigu.gulimall.product.service.CategoryService;
@@ -37,9 +32,10 @@ public class CategoryController {
      * @return
      */
     @RequestMapping("/list/tree")
-    public String list(){
+    public R list(){
         List<CategoryEntity> categoryEntities =  categoryService.listWithTree();
-        return JSONUtil.toJsonStr(categoryEntities).toString();
+        R data = R.ok().put("data", categoryEntities);
+        return data;
     }
 
     /**

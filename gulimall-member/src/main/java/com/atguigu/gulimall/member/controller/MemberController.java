@@ -40,7 +40,12 @@ public class MemberController {
     String age;
     @RequestMapping("/test")
     public R testNacosConfig(){
-        return R.ok().put("name", name).put("age", age);
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setCity("111");
+        memberEntity.setEmail("111");
+        memberEntity.setHeader("111");
+        memberEntity.setMobile("111");
+        return R.ok().put("name", name).put("age", age).put("obj", memberEntity);
     }
     /**
      * 列表
