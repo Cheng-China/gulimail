@@ -1,16 +1,15 @@
 package com.atguigu.gulimall.product.controller;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
+import com.atguigu.gulimall.common.utils.PageUtils;
+import com.atguigu.gulimall.common.utils.R;
+import com.atguigu.gulimall.product.entity.CategoryEntity;
+import com.atguigu.gulimall.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.atguigu.gulimall.product.entity.CategoryEntity;
-import com.atguigu.gulimall.product.service.CategoryService;
-import com.atguigu.gulimall.common.utils.PageUtils;
-import com.atguigu.gulimall.common.utils.R;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 
@@ -29,13 +28,12 @@ public class CategoryController {
 
     /**
      * 返回树形结构数据
-     * @return
+     * @return 三级目录结构
      */
     @RequestMapping("/list/tree")
     public R list(){
         List<CategoryEntity> categoryEntities =  categoryService.listWithTree();
-        R data = R.ok().put("data", categoryEntities);
-        return data;
+        return R.ok().put("data", categoryEntities);
     }
 
     /**
