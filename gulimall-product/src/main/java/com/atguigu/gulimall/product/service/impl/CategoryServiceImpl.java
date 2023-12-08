@@ -11,10 +11,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -24,7 +21,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<CategoryEntity> page = this.page(
                 new Query<CategoryEntity>().getPage(params),
-                new QueryWrapper<CategoryEntity>()
+                new QueryWrapper<>()
         );
 
         return new PageUtils(page);
@@ -33,7 +30,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     @Override
     public List<CategoryEntity> listWithTree() {
         List<CategoryEntity> categoryEntities = baseMapper.selectList(null);
-        List<CategoryEntity> rootCategory = categoryEntities.stream().filter(item -> item.getParentCid() == 0).collect(Collectors.toList());
+        List<CategoryEntity> rootCategory = categoryEntities
+                .stream()
+                .filter(item -> item.getParentCid() == 0)
+                .sorted(Comparator.comparing(CategoryEntity::getSort))
+                .collect(Collectors.toList());
 
         rootCategory.forEach(item -> setChildren(item, categoryEntities));
         return categoryEntities;
@@ -48,6 +49,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
                     }
                     root.getChildren().add(item);
                 })
+//                .sorted(Comparator.comparing(CategoryEntity::getSort))
                 .forEach(item -> setChildren(item,categoryEntities));
     }
 
