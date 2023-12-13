@@ -37,7 +37,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
                 .collect(Collectors.toList());
 
         rootCategory.forEach(item -> setChildren(item, categoryEntities));
-        return categoryEntities;
+        return rootCategory;
     }
 
     public void setChildren(CategoryEntity root, List<CategoryEntity> categoryEntities){
