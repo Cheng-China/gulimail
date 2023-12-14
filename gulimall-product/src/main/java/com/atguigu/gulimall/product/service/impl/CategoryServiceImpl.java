@@ -7,6 +7,7 @@ import com.atguigu.gulimall.product.dao.CategoryDao;
 import com.atguigu.gulimall.product.entity.CategoryEntity;
 import com.atguigu.gulimall.product.service.CategoryService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.injector.methods.DeleteBatchByIds;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
         rootCategory.forEach(item -> setChildren(item, categoryEntities));
         return rootCategory;
+    }
+
+    @Override
+    public void removeMenusByIds(List<Long> list) {
+//        TODO 删除商品前需要判断其是否被依赖
+        baseMapper.deleteBatchIds(list);
     }
 
     public void setChildren(CategoryEntity root, List<CategoryEntity> categoryEntities){

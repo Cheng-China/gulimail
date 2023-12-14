@@ -16,5 +16,10 @@ mybatis-plus:
     db-config:
 #      设置主键自增
       id-type: auto
+      logic-delete-value: 0 # 0 表示已经逻辑删除
+      logic-not-delete-value: 1 # 1 表示逻辑未删除
 server:
   port: 10000
+logging:
+  level:
+    com.atguigu.gulimall.product: debug
