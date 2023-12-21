@@ -3,6 +3,7 @@ package com.atguigu.gulimall.product.controller;
 import com.atguigu.gulimall.common.utils.PageUtils;
 import com.atguigu.gulimall.common.utils.R;
 import com.atguigu.gulimall.product.entity.CategoryEntity;
+import com.atguigu.gulimall.product.exception.BaseException;
 import com.atguigu.gulimall.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,12 @@ import java.util.Map;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+
+
+    @RequestMapping("/testException")
+    public void testException(){
+        throw new BaseException("11","测试的异常");
+    }
 
     /**
      * 返回树形结构数据
